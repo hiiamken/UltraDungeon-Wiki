@@ -2,105 +2,92 @@
 
 ## Overview
 
-UltraDungeon supports multiple reward types that are given to players upon dungeon completion.
+UltraDungeon uses a **unified reward system**. All reward types are managed in one place — no separate "Default Rewards", "Card Flip", or "Legacy" systems.
+
+Each reward has a **drop rate** (1–100):
+- **Rate 100** = Guaranteed (always given if reward slots are available)
+- **Rate 1–99** = Random chance (higher rate = more likely to drop)
+
+When a player clears a dungeon, the plugin rolls between **min rewards** and **max rewards** for that player.
 
 ## Reward Types
 
-### 1. Default Rewards (Guaranteed)
-Items and commands given to **every** player who completes the dungeon.
+| Type | Description | Requires |
+|------|-------------|----------|
+| `ITEM` | Any Minecraft item (full NBT/enchants/custom model data) | — |
+| `COMMAND` | Console command (supports `%player%`) | — |
+| `VAULT_MONEY` | Deposit money | [Vault](./vault) |
+| `MMOITEMS_ITEM` | MMOItems item by type + ID | [MMOItems](./mmoitems) |
+| `MMOCORE_XP` | Give class XP | [MMOCore](./mmocore) |
+| `CUSTOM_ITEM` | ItemsAdder / Oraxen item by ID | ItemsAdder or Oraxen |
+
+## How Rewards Are Rolled
+
+1. Roll `k = random(minRewards, maxRewards)`
+2. **Guaranteed rewards** (rate = 100) are picked first:
+   - If `k ≥ guaranteed count` → all guaranteed rewards are given
+   - If `k < guaranteed count` → only top `k` (by list order or random, depending on config)
+3. **Remaining slots** (`k - guaranteedPicked`) are filled from the random pool (rate < 100), weighted by rate, **without replacement** (no duplicates per clear)
+
+## Config Format (Room File)
 
 ```yaml
-DefaultRewards:
-  enabled: true
-  rewards:
-    diamond_sword:
-      type: item
-      item: <serialized ItemStack>
-    coins:
-      type: command
-      command: "eco give %player% 100"
-      display-name: "&6100 Coins"
-```
-
-### 2. Card Flip Rewards (Random)
-Players flip cards to reveal random rewards from a pool.
-
-```yaml
-CardFlip:
-  enabled: true
-  flips-override: -1    # -1 = use default from config.yml
-  rewards:
-    rare_sword:
-      type: item
-      rate: 10           # weight (higher = more common)
-      item: <serialized ItemStack>
-    empty:
-      type: empty
+rewards:
+  minRolls: 1
+  maxRolls: 3
+  pick100Mode: ORDER   # ORDER = top of list first, RANDOM = random pick
+  entries:
+    - type: ITEM
+      rate: 100
+      amount: 1
+    - type: COMMAND
+      rate: 30
+      command: "eco give %player% 1000"
+    - type: VAULT_MONEY
+      rate: 50
+      amount: 2500
+    - type: MMOITEMS_ITEM
       rate: 20
+      amount: 1
+      mmoType: SWORD
+      id: FLAME_BLADE
+    - type: MMOCORE_XP
+      rate: 40
+      amount: 120
 ```
 
-### 3. Legacy Rewards (Random Pool)
-Classic random reward system. `RewardAmount` controls how many are picked.
+## GUI Setup (Recommended)
 
-```yaml
-Reward:
-  reward_1:
-    Chance: 50
-    Command: "eco give %player% 500"
-  reward_2:
-    Chance: 100
-    Item: <serialized ItemStack>
-RewardAmount: 1
-```
+All rewards are configured through the **Dungeon Editor → Rewards** button. No need to edit YAML manually.
 
-### 4. Vault Money Reward
-Requires [Vault](./vault) integration.
+### Rewards Menu
+The main rewards screen shows:
+- **Reward List** — view and manage all rewards
+- **Min Rewards** — minimum rewards per player per clear
+- **Max Rewards** — maximum rewards per player per clear
+- **Guaranteed Order** — how guaranteed rewards are prioritized when there are more than the player can receive
 
-```yaml
-MoneyReward: 500.0    # Money given on completion
-```
+### Rewards List
+A paginated list of all rewards. From here you can:
+- **Click** an entry to edit its rate/amount
+- **Shift+Click** an entry to delete it (with confirmation)
+- **Add New Reward** — guided step-by-step in chat
 
-### 5. MMOCore XP Reward
-Requires [MMOCore](./mmocore) integration.
+### Add New Reward (Chat Flow)
+1. Click **+ Add New Reward**
+2. Choose type: `item` | `command` | `vault` | `mmoitem` | `mmocore` | `customitem`
+3. Follow the prompts (hold item + type `add`, enter command, enter amount, etc.)
+4. Enter the **drop rate** (1–100)
+5. Done — the reward is added and you're back in the GUI
 
-```yaml
-MMOCoreExpReward: 200.0    # Class EXP given on completion
-```
+Type `cancel` at any step to go back.
 
-### 6. MMOItems Reward
-Requires [MMOItems](./mmoitems) integration.
+### Edit Reward
+Click any reward to open the edit screen:
+- **Change Drop Rate** — click to adjust, or middle-click to type exact value
+- **Change Amount** — click to adjust, or middle-click to type exact value
+- **Reward Details** — view all info (type, command, item material, etc.)
 
-```yaml
-MMOItemRewards:
-  sword_1:
-    Type: SWORD
-    Id: FLAME_BLADE
-    Amount: 1
-```
+## GUI Config File
 
-### 7. Victory Commands
-Raw commands executed on completion. Runs as console.
-
-```yaml
-VictoryCommands:
-  - "broadcast %player% completed the dungeon!"
-  - "title %player% title {\"text\":\"Victory!\"}"
-```
-
-## Configuring via GUI
-
-The setup wizard provides a **Rewards** button that opens the reward editor. You can:
-- Add item rewards (drag items from inventory)
-- Add command rewards (type in chat)
-- Set drop chance per reward
-- Configure Money Reward and Entry Fee directly in the main wizard GUI
-
-## Reward Flow Order
-
-When a player completes a dungeon, rewards are given in this order:
-1. Default Rewards (if enabled)
-2. Legacy Reward pool
-3. Vault Money Reward
-4. MMOCore XP Reward
-5. MMOItems Rewards
-6. Victory Commands
+The GUI appearance (titles, materials, lore, chat messages) is fully customizable in `plugins/UltraDungeon/gui/rewards.yml`. See [GUI Config](../config/gui) for details.
