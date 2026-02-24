@@ -2,42 +2,80 @@
 
 ## Overview
 
-The season system provides time-limited leaderboards with automatic rewards for top players.
+The season system provides **time-limited leaderboards** with automatic rewards for top players. All-time points are never affected — seasons only track a separate seasonal score.
 
 ## How It Works
 
-1. A season runs for a configurable duration (e.g., 30 days)
-2. Players earn season points from dungeon completions
-3. When a season ends, top players receive rewards
-4. A new season starts automatically
+1. A season runs for a set duration (e.g. 30 days or between explicit dates)
+2. Players earn **season points** from dungeon completions (same scoring formula as all-time)
+3. When a season ends, **top players receive reward commands** automatically
+4. A **new season starts immediately** after the old one ends
+5. The first season is auto-created on plugin startup if none exists
 
 ## Configuration
 
+Located in `config.yml` under `scoring.season`:
+
 ```yaml
-season:
-  duration-days: 30
-  rewards:
-    1:    # 1st place
-      - "give %player% diamond 64"
-      - "eco give %player% 10000"
-    2:    # 2nd place
-      - "give %player% diamond 32"
-      - "eco give %player% 5000"
-    3:    # 3rd place
-      - "give %player% diamond 16"
-      - "eco give %player% 2500"
+scoring:
+  season:
+    enabled: true
+    timezone: "UTC"               # Java TimeZone ID (e.g. Asia/Ho_Chi_Minh, America/New_York)
+    start-date: ""                # Explicit start (yyyy-MM-dd), empty = auto
+    end-date: ""                  # Explicit end (yyyy-MM-dd), empty = auto
+    duration-days: 30             # Fallback when dates are empty (30 = monthly, 7 = weekly)
+    rewards:
+      1:
+        commands:
+          - "give %player% diamond 64"
+          - "say %player% achieved #1 in the dungeon season!"
+      2:
+        commands:
+          - "give %player% diamond 32"
+      3:
+        commands:
+          - "give %player% diamond 16"
 ```
+
+### Two Scheduling Modes
+
+| Mode | How to use | What happens when season ends |
+|------|-----------|-------------------------------|
+| **Explicit dates** | Set `start-date` and `end-date` (e.g. `2026-03-01` to `2026-03-31`) | New season auto-created using `duration-days` from end date |
+| **Duration only** | Leave `start-date` and `end-date` empty | Plugin uses today as start, adds `duration-days` for end |
+
+### Reward Placeholders
+
+| Placeholder | Description |
+|-------------|-------------|
+| `%player%` | Player name |
+| `%rank%` | Leaderboard rank |
+| `%points%` | Season points |
 
 ## Viewing Season Info
 
-- `/dungeon top` → Season tab shows current season progress
+- `/dungeon top` → **Season tab** (page 2) shows current season leaderboard
 - Season start/end dates are displayed
-- Current rankings update in real-time
+- Rankings update in real-time
+- **Personal Stats tab** (page 3) shows your season points, completions, and streaks
 
 ## Database
 
-Season data is stored in:
-- `season_points` — Per-player per-season point totals
-- `season_info` — Season metadata (ID, start/end dates, active flag)
+Season data is stored in two tables:
 
-The first season is auto-created when the plugin starts if none exists.
+| Table | Contents |
+|-------|----------|
+| `season_points` | Per-player per-season point totals |
+| `season_info` | Season metadata (ID, start date, end date, active flag) |
+
+## Season Lifecycle
+
+```
+Plugin starts
+  └─ No active season? → Create new season from config
+  └─ Active season expired?
+       └─ Distribute rewards to top players (console commands)
+       └─ End current season
+       └─ Create new season automatically
+  └─ Active season still running → Do nothing
+```

@@ -6,7 +6,7 @@ UltraDungeon là plugin dungeon Minecraft cho phép bạn tạo **phó bản wav
 
 ## Tính năng chính
 
-- **Chiến đấu theo Wave** — Tối đa 10 wave quái + boss wave mỗi dungeon
+- **Chiến đấu theo Wave** — Không giới hạn số wave quái + boss wave mỗi dungeon
 - **GUI Setup Wizard** — Tạo dungeon không cần chỉnh YAML
 - **Hệ thống Phần thưởng** — Items, commands, Vault money, MMOItems, MMOCore XP
 - **Scoring Engine** — Kill bonus, speed bonus, streaks, leaderboard

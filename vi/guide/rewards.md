@@ -21,13 +21,15 @@ Khi người chơi hoàn thành dungeon, plugin roll ngẫu nhiên giữa **min 
 | `MMOCORE_XP` | Cho XP class | [MMOCore](/vi/guide/mmocore) |
 | `CUSTOM_ITEM` | Item từ ItemsAdder / Oraxen | ItemsAdder hoặc Oraxen |
 
-## Cách roll phần thưởng
+## Cách nhận phần thưởng
 
-1. Roll `k = random(minRewards, maxRewards)`
-2. **Phần thưởng bảo đảm** (rate = 100) được chọn trước:
-   - Nếu `k ≥ số lượng bảo đảm` → nhận tất cả
-   - Nếu `k < số lượng bảo đảm` → chỉ nhận `k` cái (theo thứ tự list hoặc random, tuỳ config)
-3. **Slot còn lại** được fill từ pool ngẫu nhiên (rate < 100), weighted theo rate, **không trùng lặp** trong cùng 1 lần clear
+Khi người chơi hoàn thành dungeon, đây là những gì xảy ra — từng bước một:
+
+1. **Chọn số lượng**: Plugin chọn ngẫu nhiên một số giữa **Min Rewards** và **Max Rewards**. Đây là số phần thưởng người chơi được nhận. Ví dụ: nếu min = 2 và max = 5, người chơi có thể nhận 3 phần thưởng lần này.
+
+2. **Phần thưởng bảo đảm được nhận trước**: Bất kỳ reward nào có rate = 100 đều là "bảo đảm" — luôn được ưu tiên nhận trước. Nếu người chơi có đủ slot thì nhận hết. Nếu không đủ slot, **Guaranteed Order** quyết định nhận cái nào (theo thứ tự trong list hoặc random).
+
+3. **Slot còn lại nhận phần thưởng ngẫu nhiên**: Nếu vẫn còn slot trống, plugin chọn từ các reward còn lại (rate < 100). Rate cao hơn = cơ hội được chọn cao hơn. Mỗi reward chỉ được nhận 1 lần mỗi lượt chơi — không trùng lặp.
 
 ## Cấu hình (Room File)
 

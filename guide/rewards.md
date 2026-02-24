@@ -21,13 +21,15 @@ When a player clears a dungeon, the plugin rolls between **min rewards** and **m
 | `MMOCORE_XP` | Give class XP | [MMOCore](./mmocore) |
 | `CUSTOM_ITEM` | ItemsAdder / Oraxen item by ID | ItemsAdder or Oraxen |
 
-## How Rewards Are Rolled
+## How Rewards Are Given
 
-1. Roll `k = random(minRewards, maxRewards)`
-2. **Guaranteed rewards** (rate = 100) are picked first:
-   - If `k ≥ guaranteed count` → all guaranteed rewards are given
-   - If `k < guaranteed count` → only top `k` (by list order or random, depending on config)
-3. **Remaining slots** (`k - guaranteedPicked`) are filled from the random pool (rate < 100), weighted by rate, **without replacement** (no duplicates per clear)
+When a player finishes the dungeon, here's what happens — step by step:
+
+1. **Pick a number**: The plugin picks a random number between **Min Rewards** and **Max Rewards**. This is how many rewards the player gets. For example, if min = 2 and max = 5, the player might get 3 rewards this time.
+
+2. **Give guaranteed rewards first**: Any reward with rate = 100 is "guaranteed" — it always tries to be given first. If the player has enough reward slots, they get all of them. If not, the **Guaranteed Order** setting decides which ones they get (either the ones at the top of the list, or random ones).
+
+3. **Fill the rest with random rewards**: If there are still reward slots left, the plugin picks from the remaining rewards (rate < 100). Higher rate = higher chance to be picked. Each reward can only be given once per run — no duplicates.
 
 ## Config Format (Room File)
 

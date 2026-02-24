@@ -27,11 +27,11 @@ These must be configured before you can save:
 
 1. **Display Name** — The name shown to players (supports `&` color codes)
 2. **Spawn Point** — Where players teleport when joining
-3. **Waves** — At least 1 wave with mobs
+3. **Border Region** — Two corners defining the play area (prevents players from escaping)
+4. **Waves** — At least 1 wave with mobs
 
 ## Optional Settings
 
-- **Border Region** — Two corners defining the play area
 - **Ticket System** — Require tickets to enter
 - **Permission Gate** — Restrict access by permission node
 - **HP Scaling** — Scale mob HP based on player count
@@ -47,8 +47,9 @@ Click the **Name Tag** icon → type the display name in chat. Supports `&` colo
 ### 2. Set Spawn Point
 Stand at the desired spawn location → click **Spawn Point** → run `/dungeon set`.
 
-### 3. Set Border (Optional)
+### 3. Set Border (Required)
 Click **Border Region** → stand at corner 1 → `/dungeon set` → stand at corner 2 → `/dungeon set`.
+The border defines the play area and prevents players from escaping the dungeon.
 
 Use **Preview Border** to see a particle outline for 5 seconds.
 

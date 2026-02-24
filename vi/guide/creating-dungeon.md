@@ -14,11 +14,11 @@ Mở GUI inventory 6 hàng với tất cả cài đặt dungeon theo danh mục.
 
 1. **Display Name** — Tên hiển thị cho người chơi (hỗ trợ `&` color codes)
 2. **Spawn Point** — Vị trí teleport khi vào dungeon
-3. **Waves** — Ít nhất 1 wave quái
+3. **Border Region** — Hai góc xác định khu vực chơi (ngăn người chơi thoát ra ngoài)
+4. **Waves** — Ít nhất 1 wave quái
 
 ## Cài đặt tùy chọn
 
-- **Border Region** — Hai góc xác định khu vực chơi
 - **Ticket System** — Yêu cầu ticket để vào
 - **Permission Gate** — Giới hạn bằng permission node
 - **HP Scaling** — Scale HP quái theo số người
@@ -34,8 +34,9 @@ Click **Name Tag** → gõ tên trong chat. Hỗ trợ `&` color codes.
 ### 2. Đặt Spawn Point
 Đứng tại vị trí spawn → click **Spawn Point** → chạy `/dungeon set`.
 
-### 3. Đặt Border (Tùy chọn)
+### 3. Đặt Border (Bắt buộc)
 Click **Border Region** → đứng ở góc 1 → `/dungeon set` → đứng ở góc 2 → `/dungeon set`.
+Border xác định khu vực chơi và ngăn người chơi thoát ra ngoài dungeon.
 
 ### 4. Cấu hình Waves
 Click **Waves & Mobs** để mở wave editor. Xem [Waves & Mobs](/guide/waves) để biết chi tiết.

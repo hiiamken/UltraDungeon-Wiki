@@ -6,7 +6,7 @@ UltraDungeon is a premium Minecraft dungeon plugin that lets you create **wave-b
 
 ## Key Features
 
-- **Wave-Based Combat** — Up to 10 mob waves + boss wave per dungeon
+- **Wave-Based Combat** — Unlimited mob waves + boss wave per dungeon
 - **GUI Setup Wizard** — Create dungeons without touching YAML files
 - **Reward System** — Items, commands, Vault money, MMOItems, MMOCore XP
 - **Scoring Engine** — Kill bonus, speed bonus, streaks, leaderboards
