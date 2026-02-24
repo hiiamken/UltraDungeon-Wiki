@@ -3,9 +3,10 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'UltraDungeon',
   description: 'UltraDungeon Wiki — Minecraft Dungeon Plugin',
+    base: '/UltraDungeon-Wiki/',
 
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
+      ['link', { rel: 'icon', href: '/UltraDungeon-Wiki/favicon.ico' }],
   ],
 
   // Multi-language (EN default, VI secondary)
@@ -147,11 +148,11 @@ export default defineConfig({
   },
 
   themeConfig: {
-    logo: '/logo.png',
+      logo: '/UltraDungeon-Wiki/logo.png',
     siteTitle: 'UltraDungeon',
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/YOUR_USERNAME/UltraDungeon' },
+        { icon: 'github', link: 'https://github.com/hiiamken/UltraDungeon' },
     ],
 
     search: {
