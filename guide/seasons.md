@@ -14,13 +14,16 @@ The season system provides **time-limited leaderboards** with automatic rewards 
 
 ## Configuration
 
-Located in `config.yml` under `scoring.season`:
+Located in `config.yml` under `scoring.season`.
+Timezone is set globally at `general.timezone` (shared with ticket resets and all time-based features).
 
 ```yaml
+general:
+  timezone: "UTC"               # Java TimeZone ID (e.g. Asia/Ho_Chi_Minh, America/New_York)
+
 scoring:
   season:
     enabled: true
-    timezone: "UTC"               # Java TimeZone ID (e.g. Asia/Ho_Chi_Minh, America/New_York)
     start-date: ""                # Explicit start (yyyy-MM-dd), empty = auto
     end-date: ""                  # Explicit end (yyyy-MM-dd), empty = auto
     duration-days: 30             # Fallback when dates are empty (30 = monthly, 7 = weekly)

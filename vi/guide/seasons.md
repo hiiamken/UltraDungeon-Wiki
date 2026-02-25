@@ -14,13 +14,16 @@ Hệ thống season cung cấp **bảng xếp hạng giới hạn thời gian** 
 
 ## Cấu hình
 
-Nằm trong `config.yml` ở `scoring.season`:
+Nằm trong `config.yml` ở `scoring.season`.
+Timezone được đặt toàn cục tại `general.timezone` (dùng chung cho ticket reset và tất cả tính năng thời gian).
 
 ```yaml
+general:
+  timezone: "UTC"               # Java TimeZone ID (ví dụ: Asia/Ho_Chi_Minh, America/New_York)
+
 scoring:
   season:
     enabled: true
-    timezone: "UTC"               # Java TimeZone ID (ví dụ: Asia/Ho_Chi_Minh, America/New_York)
     start-date: ""                # Ngày bắt đầu (yyyy-MM-dd), để trống = tự động
     end-date: ""                  # Ngày kết thúc (yyyy-MM-dd), để trống = tự động
     duration-days: 30             # Khi dates trống (30 = hàng tháng, 7 = hàng tuần)
