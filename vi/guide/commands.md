@@ -48,11 +48,3 @@ Lệnh chính: `/dungeon` (alias: `/ud`)
 | `/dungeon point set <player> <số>` | Đặt điểm |
 | `/dungeon point reset <player>` | Reset điểm |
 
-## Lệnh Builder
-
-| Lệnh | Mô tả |
-|---|---|
-| `/dungeon builder wand` | Lấy builder wand (BLAZE_ROD) |
-| `/dungeon builder show` | Hiện particle markers |
-| `/dungeon builder hide` | Ẩn particle markers |
-| `/dungeon builder info` | Xem thông tin dungeon tại vị trí |

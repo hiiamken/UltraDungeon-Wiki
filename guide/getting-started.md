@@ -25,7 +25,7 @@ UltraDungeon is a premium Minecraft dungeon plugin that lets you create **wave-b
 5. Click **Create** — your dungeon is live!
 
 ::: tip
-Use `/dungeon builder wand` to get a visual builder tool that shows particle markers for all dungeon elements.
+Use `/dungeon validate <name>` to auto-check your dungeon config for missing or invalid settings.
 :::
 
 ## Requirements

@@ -48,11 +48,3 @@ Base command: `/dungeon` (alias: `/ud`)
 | `/dungeon point set <player> <amount>` | Set points |
 | `/dungeon point reset <player>` | Reset points |
 
-## Builder Commands
-
-| Command | Description |
-|---|---|
-| `/dungeon builder wand` | Get the builder wand (BLAZE_ROD) |
-| `/dungeon builder show` | Show particle markers for dungeon elements |
-| `/dungeon builder hide` | Hide particle markers |
-| `/dungeon builder info` | View dungeon info at your location |

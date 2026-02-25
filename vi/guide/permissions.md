@@ -19,7 +19,6 @@
 | `ultradungeon.delete` | Xoá dungeon | `op` |
 | `ultradungeon.reload` | Reload config | `op` |
 | `ultradungeon.validate` | Chạy validation | `op` |
-| `ultradungeon.builder` | Dùng builder tools | `op` |
 | `ultradungeon.ticket.manage` | Quản lý ticket | `op` |
 | `ultradungeon.point.manage` | Quản lý điểm | `op` |
 

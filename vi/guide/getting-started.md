@@ -25,7 +25,7 @@ UltraDungeon là plugin dungeon Minecraft cho phép bạn tạo **phó bản wav
 5. Nhấn **Create** — dungeon sẵn sàng!
 
 ::: tip
-Dùng `/dungeon builder wand` để lấy builder tool hiển thị particle markers cho tất cả thành phần dungeon.
+Dùng `/dungeon validate <tên>` để tự động kiểm tra cấu hình dungeon cho lỗi hoặc thiếu sót.
 :::
 
 ## Yêu cầu

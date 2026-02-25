@@ -19,7 +19,6 @@
 | `ultradungeon.delete` | Delete dungeons | `op` |
 | `ultradungeon.reload` | Reload config | `op` |
 | `ultradungeon.validate` | Run validation | `op` |
-| `ultradungeon.builder` | Use builder tools | `op` |
 | `ultradungeon.ticket.manage` | Manage tickets | `op` |
 | `ultradungeon.point.manage` | Manage points | `op` |
 
